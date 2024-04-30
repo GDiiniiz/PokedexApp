@@ -31,8 +31,6 @@ export function InfoPokemon() {
   const { pokemonsInfo } = route?.params || {};
   const [pokemons, setPokemons] = useState<PokemonData[] | null>(null);
 
-  console.log(pokemonsInfo);
-
   function backPage() {
     navigation.goBack();
   }
@@ -67,6 +65,13 @@ export function InfoPokemon() {
             {pokemonsInfo?.name &&
               pokemonsInfo.name.charAt(0).toUpperCase() + pokemonsInfo.name.slice(1)}
           </Text>
+        </View>
+
+        <View style={{ marginHorizontal: 16 }}>
+          <Image
+            source={require('../../../components/images/pokeball.png')}
+            style={{ position: 'absolute', right: 0 }}
+          />
         </View>
 
         <View style={{ alignSelf: 'center', top: 53, zIndex: 2 }}>
