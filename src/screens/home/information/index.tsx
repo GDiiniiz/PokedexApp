@@ -57,13 +57,23 @@ export function InfoPokemon() {
     <SafeAreaView style={{ flex: 1, backgroundColor: pokemonsInfo?.color }}>
       <ScrollView>
         <View
-          style={{ flexDirection: 'row', alignItems: 'center', gap: 32, paddingHorizontal: 16 }}>
-          <TouchableOpacity onPress={backPage}>
-            <Ionicons name="arrow-back-outline" size={44} color="#f4f4f4" />
-          </TouchableOpacity>
-          <Text style={{ color: '#f4f4f4', fontWeight: 'bold', fontSize: 44 }}>
-            {pokemonsInfo?.name &&
-              pokemonsInfo.name.charAt(0).toUpperCase() + pokemonsInfo.name.slice(1)}
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            paddingHorizontal: 16,
+            justifyContent: 'space-between',
+          }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <TouchableOpacity onPress={backPage}>
+              <Ionicons name="arrow-back-outline" size={44} color="#f4f4f4" />
+            </TouchableOpacity>
+            <Text style={{ color: '#f4f4f4', fontWeight: 'bold', fontSize: 44 }}>
+              {pokemonsInfo?.name &&
+                pokemonsInfo.name.charAt(0).toUpperCase() + pokemonsInfo.name.slice(1)}
+            </Text>
+          </View>
+          <Text style={{ color: '#f4f4f4', fontWeight: 'bold', fontSize: 18 }}>
+            {pokemonsInfo?.code}
           </Text>
         </View>
 
@@ -91,17 +101,55 @@ export function InfoPokemon() {
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
+                gap: 4,
+
                 justifyContent: 'center',
-                gap: 8,
               }}>
-              <View style={{ backgroundColor: pokemonsInfo?.color, padding: 8, borderRadius: 16 }}>
+              <View
+                style={{
+                  backgroundColor:
+                    pokemons?.[0]?.types[0]?.type?.name === 'grass'
+                      ? '#74CB48'
+                      : pokemonsInfo?.color,
+                  padding: 8,
+                  borderRadius: 16,
+                }}>
                 <Text style={{ color: '#f4f4f4', fontWeight: 'bold', fontSize: 16 }}>
                   {pokemons?.[0]?.types[0]?.type?.name}
                 </Text>
               </View>
               {pokemons?.[0]?.types[1]?.type?.name && (
                 <View
-                  style={{ backgroundColor: pokemonsInfo?.color, padding: 8, borderRadius: 16 }}>
+                  style={{
+                    backgroundColor:
+                      pokemons?.[0]?.types[1]?.type?.name === 'grass'
+                        ? '#74CB48'
+                        : pokemons?.[0]?.types[1]?.type?.name === 'poison'
+                          ? '#A43E9E'
+                          : pokemons?.[0]?.types[1]?.type?.name === 'fire'
+                            ? '#F57D31'
+                            : pokemons?.[0]?.types[1]?.type?.name === 'water'
+                              ? '#6493EB'
+                              : pokemons?.[0]?.types[1]?.type?.name === 'bug'
+                                ? '#A7B723'
+                                : pokemons?.[0]?.types[1]?.type?.name === 'flying'
+                                  ? '#A891EC'
+                                  : pokemons?.[0]?.types[1]?.type?.name === 'electric'
+                                    ? '#F9CF30'
+                                    : pokemons?.[0]?.types[1]?.type?.name === 'ghost'
+                                      ? '#70559B'
+                                      : pokemons?.[0]?.types[1]?.type?.name === 'normal'
+                                        ? '#AAA67F'
+                                        : pokemons?.[0]?.types[1]?.type?.name === 'psychic'
+                                          ? '#FB5584'
+                                          : pokemons?.[0]?.types[1]?.type?.name === 'steel'
+                                            ? '#B7B9D0'
+                                            : pokemons?.[0]?.types[1]?.type?.name === 'rock'
+                                              ? '#B69E31'
+                                              : 'blue',
+                    padding: 8,
+                    borderRadius: 16,
+                  }}>
                   <Text style={{ color: '#f4f4f4', fontWeight: 'bold', fontSize: 16 }}>
                     {pokemons?.[0]?.types[1]?.type?.name}
                   </Text>
@@ -141,19 +189,37 @@ export function InfoPokemon() {
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                justifyContent: 'space-between',
+                gap: 4,
               }}>
               <Text style={{ color: pokemonsInfo?.color, fontWeight: 'bold', fontSize: 17 }}>
                 {pokemons?.[0]?.stats?.[0]?.stat?.name}
               </Text>
 
               <Text>{pokemons?.[0]?.stats?.[0]?.base_stat}</Text>
+
+              <View
+                style={{
+                  backgroundColor: '#ccc',
+                  height: 4,
+                  flexGrow: 1,
+                  borderRadius: 30,
+                }}>
+                <View
+                  style={{
+                    backgroundColor: pokemonsInfo?.color,
+                    height: 4,
+                    width: `${pokemons?.[0]?.stats?.[0]?.base_stat}%`,
+                    borderRadius: 30,
+                  }}
+                />
+              </View>
             </View>
+
             <View
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                justifyContent: 'space-between',
+                gap: 4,
               }}>
               <Text
                 style={{
@@ -165,12 +231,29 @@ export function InfoPokemon() {
               </Text>
 
               <Text>{pokemons?.[0]?.stats?.[1]?.base_stat}</Text>
+              <View
+                style={{
+                  backgroundColor: '#ccc',
+                  height: 4,
+                  flexGrow: 1,
+                  borderRadius: 30,
+                }}>
+                <View
+                  style={{
+                    backgroundColor: pokemonsInfo?.color,
+                    height: 4,
+                    width: `${pokemons?.[0]?.stats?.[1]?.base_stat}%`,
+                    borderRadius: 30,
+                  }}
+                />
+              </View>
             </View>
+
             <View
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                justifyContent: 'space-between',
+                gap: 4,
               }}>
               <Text
                 style={{
@@ -187,35 +270,81 @@ export function InfoPokemon() {
                 }}>
                 {pokemons?.[0]?.stats?.[2]?.base_stat}
               </Text>
+              <View style={{ backgroundColor: '#ccc', height: 4, flexGrow: 1 }}>
+                <View
+                  style={{
+                    backgroundColor: pokemonsInfo?.color,
+                    height: 4,
+                    width: `${pokemons?.[0]?.stats?.[2]?.base_stat}%`,
+                  }}
+                />
+              </View>
             </View>
+
             <View
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                justifyContent: 'space-between',
+                gap: 4,
               }}>
               <Text style={{ color: pokemonsInfo?.color, fontWeight: 'bold', fontSize: 17 }}>
                 {pokemons?.[0]?.stats?.[3]?.stat?.name}
               </Text>
 
               <Text>{pokemons?.[0]?.stats?.[3]?.base_stat}</Text>
+              <View
+                style={{
+                  backgroundColor: '#ccc',
+                  height: 4,
+                  flexGrow: 1,
+                  borderRadius: 30,
+                }}>
+                <View
+                  style={{
+                    backgroundColor: pokemonsInfo?.color,
+                    height: 4,
+                    width: `${pokemons?.[0]?.stats?.[3]?.base_stat}%`,
+                    borderRadius: 30,
+                  }}
+                />
+              </View>
             </View>
+
             <View
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                justifyContent: 'space-between',
+                gap: 4,
               }}>
               <Text style={{ color: pokemonsInfo?.color, fontWeight: 'bold', fontSize: 17 }}>
                 {pokemons?.[0]?.stats?.[4]?.stat?.name}
               </Text>
 
               <Text>{pokemons?.[0]?.stats?.[4]?.base_stat}</Text>
+              <View
+                style={{
+                  backgroundColor: '#ccc',
+                  height: 4,
+                  flexGrow: 1,
+                  borderRadius: 30,
+                }}>
+                <View
+                  style={{
+                    backgroundColor: pokemonsInfo?.color,
+                    height: 4,
+                    width: `${pokemons?.[0]?.stats?.[4]?.base_stat}%`,
+                    borderRadius: 30,
+                  }}
+                />
+              </View>
             </View>
+
             <View
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
+                gap: 4,
+
                 justifyContent: 'space-between',
               }}>
               <Text style={{ color: pokemonsInfo?.color, fontWeight: 'bold', fontSize: 17 }}>
@@ -223,6 +352,22 @@ export function InfoPokemon() {
               </Text>
 
               <Text>{pokemons?.[0]?.stats?.[5]?.base_stat}</Text>
+              <View
+                style={{
+                  backgroundColor: '#ccc',
+                  height: 4,
+                  flexGrow: 1,
+                  borderRadius: 30,
+                }}>
+                <View
+                  style={{
+                    backgroundColor: pokemonsInfo?.color,
+                    height: 4,
+                    width: `${pokemons?.[0]?.stats?.[5]?.base_stat}%`,
+                    borderRadius: 30,
+                  }}
+                />
+              </View>
             </View>
           </View>
         </View>
